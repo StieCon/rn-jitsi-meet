@@ -10,12 +10,12 @@
     { 
       "name": "Sébastien Krafft",
       "email": "skrafft@gmail.com"
-      "url" : "https://github.com/skrafft/"
+      "url": "https://github.com/skrafft/"
     },
     { 
       "name": "Kai Herrmann",
       "email": "kai.herrmann@stiecon.de"
-      "url" : "https://github.com/kaiherrman/"
+      "url": "https://github.com/kaiherrman/"
     }
   ],
   "homepage": "https://github.com/StieCon/rn-jitsi-meet",
