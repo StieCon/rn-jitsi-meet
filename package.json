@@ -1,5 +1,5 @@
 {
-  "name": "react-native-jitsi-meet",
+  "name": "rn-jitsi-meet",
   "description": "Jitsi Meet SDK wrapper for React Native.",
   "version": "2.1.1",
   "author": {
@@ -7,10 +7,20 @@
     "email": "skrafft@gmail.com"
   },
   "contributors": [
+    { 
+      "name": "Sébastien Krafft",
+      "email": "skrafft@gmail.com"
+      "url" : "https://github.com/skrafft/"
+    },
+    { 
+      "name": "Kai Herrmann",
+      "email": "kai.herrmann@stiecon.de"
+      "url" : "https://github.com/kaiherrman/"
+    }
   ],
-  "homepage": "https://github.com/skrafft/react-native-jitsi-meet",
+  "homepage": "https://github.com/StieCon/rn-jitsi-meet",
   "bugs": {
-    "url": "https://github.com/skrafft/react-native-jitsi-meet/issues"
+    "url": "https://github.com/StieCon/rn-jitsi-meet/issues"
   },
   "dependencies": {
   },
@@ -31,6 +41,6 @@
   "nativePackage": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/skrafft/react-native-jitsi-meet.git"
+    "url": "https://github.com/StieCon/rn-jitsi-meet.git"
   }
 }
