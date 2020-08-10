@@ -3,25 +3,7 @@ React native wrapper for Jitsi Meet SDK
 
 ## Install
 
-`npm install react-native-jitsi-meet --save` 
-
-If you are using React-Native < 0.60, you should use a version < 2.0.0.  
-For versions higher than 2.0.0, you need to add the following piece of code in your ```metro.config.js``` file to avoid conflicts between react-native-jitsi-meet and react-native in metro bundler.
-
-```
-const blacklist = require('metro-config/src/defaults/blacklist');
-
-module.exports = {
-  resolver: {
-    blacklistRE: blacklist([
-      /ios\/Pods\/JitsiMeetSDK\/Frameworks\/JitsiMeet.framework\/assets\/node_modules\/react-native\/.*/,
-    ]),
-  },
-};
-```
-
-Although most of the process is automated, you still have to follow the platform install guide below ([iOS](#ios-install-for-rn--060) and [Android](#android-install)) to get this library to work.
-
+`npm install --save StieCon/rn-jitsi-meet#master` 
 
 ## Use (>= 2.0.0)
 
@@ -42,9 +24,18 @@ class VideoCall extends React.Component {
 
   componentDidMount() {
     setTimeout(() => {
-      const url = 'https://your.jitsi.server/roomName'; // can also be only room name and will connect to jitsi meet servers
-      const userInfo = { displayName: 'User', email: 'user@example.com', avatar: 'https:/gravatar.com/avatar/abc123' };
-      JitsiMeet.call(url, userInfo);
+      const confSettings = {
+        serverURL: "https://your.server.tld",
+        room: "exampleRoom",
+        //jwt: "",
+        subject: "Example Room"
+      }
+      const userInfo = { 
+        displayName: 'User',
+        email: 'user@example.com',
+        avatar: 'https:/gravatar.com/avatar/abc123'
+      };
+      JitsiMeet.call(confSettings, userInfo);
       /* You can also use JitsiMeet.audioCall(url) for audio only call */
       /* You can programmatically end the call with JitsiMeet.endCall() */
     }, 1000);
@@ -82,33 +73,6 @@ You can add listeners for the following events:
 - onConferenceJoined
 - onConferenceTerminated
 - onConferenceWillJoin
-
-
-## Use (< 2.0.0 and RN<0.60)
-
-In your component, 
-
-1.) import JitsiMeet and JitsiMeetEvents: `import JitsiMeet, { JitsiMeetEvents } from 'react-native-jitsi-meet';`
-
-2.) add the following code: 
-
-```
-  const initiateVideoCall = () => {
-    JitsiMeet.initialize();
-    JitsiMeetEvents.addListener('CONFERENCE_LEFT', (data) => {
-      console.log('CONFERENCE_LEFT');
-    });
-    setTimeout(() => {
-      JitsiMeet.call(`<your url>`);
-    }, 1000);
-  };
-```
-### Events
-
-You can add listeners for the following events:
-- CONFERENCE_JOINED
-- CONFERENCE_LEFT
-- CONFERENCE_WILL_JOIN
 
 ## iOS Configuration
 

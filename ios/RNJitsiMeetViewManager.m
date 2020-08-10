@@ -24,9 +24,8 @@ RCT_EXPORT_METHOD(initialize)
     RCTLogInfo(@"Initialize is deprecated in v2");
 }
 
-RCT_EXPORT_METHOD(call:(NSString *)urlString userInfo:(NSDictionary *)userInfo)
+RCT_EXPORT_METHOD(call:(NSDictionary *)call userInfo:(NSDictionary *)userInfo )
 {
-    RCTLogInfo(@"Load URL %@", urlString);
     JitsiMeetUserInfo * _userInfo = [[JitsiMeetUserInfo alloc] init];
     if (userInfo != NULL) {
       if (userInfo[@"displayName"] != NULL) {
@@ -42,7 +41,19 @@ RCT_EXPORT_METHOD(call:(NSString *)urlString userInfo:(NSDictionary *)userInfo)
     }
     dispatch_sync(dispatch_get_main_queue(), ^{
         JitsiMeetConferenceOptions *options = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {        
-            builder.room = urlString;
+            if (call[@"serverURL"] != NULL) {
+              builder.serverURL = [NSURL URLWithString:call[@"serverURL"]];
+            }
+            if (call[@"room"] != NULL) {
+              builder.room = call[@"room"];
+            }
+            if (call[@"jwt"] != NULL) {
+              builder.token = call[@"jwt"];
+            }
+            if (call[@"subject"] != NULL) {
+              builder.subject = call[@"subject"];
+            }
+
             builder.userInfo = _userInfo;
         }];
         [jitsiMeetView join:options];
