@@ -32,7 +32,7 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void call(String url, ReadableMap userInfo) {
+    public void call(ReadableMap call, ReadableMap userInfo) {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -54,11 +54,23 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                           }
                     }
                     RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
-                            .setRoom(url)
                             .setAudioOnly(false)
                             .setUserInfo(_userInfo)
-                            .build();
-                    mJitsiMeetViewReference.getJitsiMeetView().join(options);
+
+                    if (userInfo.hasKey("serverURL")) {
+                        options.setServerURL(new URL(call.getString("serverURL")));
+                    }
+                    if (userInfo.hasKey("room")) {
+                        options.setServerURL(call.getString("room"));
+                    }
+                    if (userInfo.hasKey("subject")) {
+                        options.setSubject(call.getString("subject"));
+                    }
+                    if (userInfo.hasKey("jwt")) {
+                        options.setToken(call.getString("jwt"));
+                    }
+
+                    mJitsiMeetViewReference.getJitsiMeetView().join(options.build());
                 }
             }
         });
