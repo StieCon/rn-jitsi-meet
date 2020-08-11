@@ -23,12 +23,25 @@ class VideoCall extends React.Component {
   }
 
   componentDidMount() {
+    
     setTimeout(() => {
+      //Format for bools is: "YES"/"NO" (case sensitive)
       const confSettings = {
         serverURL: "https://your.server.tld",
         room: "exampleRoom",
         //jwt: "",
-        subject: "Example Room"
+        subject: "Example Room",
+        pip: "NO",
+        addPeople: "NO",
+        calendar: "NO",
+        callIntegration: "YES",
+        closeCaptions: "NO",
+        chat: "YES",
+        invite: "NO",
+        raiseHand: "NO",
+        resolution: "720",
+        startWithVideoMuted: "YES",
+        startWithAudioMuted: "YES"
       }
       const userInfo = { 
         displayName: 'User',

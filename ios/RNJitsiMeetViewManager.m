@@ -53,6 +53,39 @@ RCT_EXPORT_METHOD(call:(NSDictionary *)call userInfo:(NSDictionary *)userInfo )
             if (call[@"subject"] != NULL) {
               builder.subject = call[@"subject"];
             }
+            if (call[@"startWithVideoMuted"] != NULL) {
+                builder.videoMuted = [call[@"startWithVideoMuted"] isEqualToString: @"YES"];
+            }
+            if (call[@"startWithAudioMuted"] != NULL) {
+                builder.audioMuted = [call[@"startWithAudioMuted"] isEqualToString: @"YES"];
+            }
+            if (call[@"pip"] != NULL) {
+                [builder setFeatureFlag:@"pip.enabled" withBoolean:[call[@"pip"] isEqualToString: @"YES"]];
+            }
+            if (call[@"addPeople"] != NULL) {
+                [builder setFeatureFlag:@"add-people.enabled" withBoolean:[call[@"addPeople"] isEqualToString: @"YES"]];
+            }
+            if (call[@"calendar"] != NULL) {
+                [builder setFeatureFlag:@"calendar.enabled" withBoolean:[call[@"calendar"] isEqualToString: @"YES"]];
+            }
+            if (call[@"callIntegration"] != NULL) {
+                [builder setFeatureFlag:@"call-integration.enabled" withBoolean:[call[@"callIntegration"] isEqualToString: @"YES"]];
+            }
+            if (call[@"closeCaptions"] != NULL) {
+                [builder setFeatureFlag:@"close-captions.enabled" withBoolean:[call[@"closeCaptions"] isEqualToString: @"YES"]];
+            }
+            if (call[@"chat"] != NULL) {
+                [builder setFeatureFlag:@"chat.enabled" withBoolean:[call[@"chat"] isEqualToString: @"YES"]];
+            }
+            if (call[@"invite"] != NULL) {
+                [builder setFeatureFlag:@"invite.enabled" withBoolean:[call[@"invite"] isEqualToString: @"YES"]];
+            }
+            if (call[@"raiseHand"] != NULL) {
+                [builder setFeatureFlag:@"raise-hand.enabled" withBoolean:[call[@"raiseHand"] isEqualToString: @"YES"]];
+            }
+            if (call[@"resolution"] != NULL) {
+                [builder setFeatureFlag:@"raise-hand.enabled" withValue:call[@"resolution"]];
+            }
 
             builder.userInfo = _userInfo;
         }];
