@@ -53,24 +53,30 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                             }
                           }
                     }
-                    RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder()
-                            .setAudioOnly(false)
-                            .setUserInfo(_userInfo)
 
-                    if (userInfo.hasKey("serverURL")) {
-                        options.setServerURL(new URL(call.getString("serverURL")));
+                    RNJitsiMeetConferenceOptions.Builder builder  = new RNJitsiMeetConferenceOptions.Builder()
+                        .setAudioOnly(false)
+                        .setUserInfo(_userInfo);
+
+                    if (call.hasKey("serverURL")) {
+                        String serverURL = call.getString("serverURL");
+                        try {
+                            builder.setServerURL(new URL(serverURL));
+                        } catch (MalformedURLException e) {}
                     }
-                    if (userInfo.hasKey("room")) {
-                        options.setServerURL(call.getString("room"));
+                    if (call.hasKey("room")) {
+                        builder.setRoom(call.getString("room"));
                     }
-                    if (userInfo.hasKey("subject")) {
-                        options.setSubject(call.getString("subject"));
+                    if (call.hasKey("subject")) {
+                        builder.setSubject(call.getString("subject"));
                     }
-                    if (userInfo.hasKey("jwt")) {
-                        options.setToken(call.getString("jwt"));
+                    if (call.hasKey("jwt")) {
+                        builder.setToken(call.getString("jwt"));
                     }
 
-                    mJitsiMeetViewReference.getJitsiMeetView().join(options.build());
+                    RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder().build();
+
+                    mJitsiMeetViewReference.getJitsiMeetView().join(options);
                 }
             }
         });
