@@ -84,7 +84,7 @@ RCT_EXPORT_METHOD(call:(NSDictionary *)call userInfo:(NSDictionary *)userInfo )
                 [builder setFeatureFlag:@"raise-hand.enabled" withBoolean:[call[@"raiseHand"] isEqualToString: @"YES"]];
             }
             if (call[@"resolution"] != NULL) {
-                [builder setFeatureFlag:@"raise-hand.enabled" withValue:call[@"resolution"]];
+                [builder setFeatureFlag:@"resolution" withValue:call[@"resolution"]];
             }
 
             builder.userInfo = _userInfo;

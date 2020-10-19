@@ -73,10 +73,41 @@ public class RNJitsiMeetModule extends ReactContextBaseJavaModule {
                     if (call.hasKey("jwt")) {
                         builder.setToken(call.getString("jwt"));
                     }
+                    if (call.hasKey("startWithVideoMuted")){
+                        builder.setVideoMuted(new String("YES").equals(call.getString("startWithVideoMuted")));  
+                    }
+                    if (call.hasKey("startWithAudioMuted")){
+                        builder.setAudioMuted(new String("YES").equals(call.getString("startWithAudioMuted")));  
+                    }
+                    if (call.hasKey("pip")){
+                        builder.setFeatureFlag("pip.enabled", new String("YES").equals(call.getString("pip")));  
+                    }
+                    if (call.hasKey("addPeople")){
+                        builder.setFeatureFlag("add-people.enabled", new String("YES").equals(call.getString("addPeople")));  
+                    }
+                    if (call.hasKey("calendar")){
+                        builder.setFeatureFlag("calendar.enabled", new String("YES").equals(call.getString("calendar")));  
+                    }
+                    if (call.hasKey("callIntegration")){
+                        builder.setFeatureFlag("call-integration.enabled", new String("YES").equals(call.getString("callIntegration")));  
+                    }
+                    if (call.hasKey("closeCaptions")){
+                        builder.setFeatureFlag("close-captions.enabled", new String("YES").equals(call.getString("closeCaptions")));  
+                    }
+                    if (call.hasKey("chat")){
+                        builder.setFeatureFlag("chat.enabled", new String("YES").equals(call.getString("chat")));  
+                    }
+                    if (call.hasKey("invite")){
+                        builder.setFeatureFlag("invite.enabled", new String("YES").equals(call.getString("invite")));  
+                    }
+                    if (call.hasKey("raiseHand")){
+                        builder.setFeatureFlag("raise-hand.enabled", new String("YES").equals(call.getString("raiseHand")));  
+                    }
+                    if (call.hasKey("resolution")){
+                        builder.setFeatureFlag("resolution", call.getString("resolution"));  
+                    }
 
-                    RNJitsiMeetConferenceOptions options = new RNJitsiMeetConferenceOptions.Builder().build();
-
-                    mJitsiMeetViewReference.getJitsiMeetView().join(options);
+                    mJitsiMeetViewReference.getJitsiMeetView().join(builder.build());
                 }
             }
         });
